@@ -1,3 +1,4 @@
+
 body{
   background-color: #0E0D16;
   font-family: 'Poppins', sans-serif;
@@ -101,10 +102,11 @@ h6{
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0px 30px;
 
   color: #FFF;
   text-align: center;
-  font-size: 25px;
+  font-size: 22px;
   font-weight: 600;
   line-height: 28px;
 }
@@ -148,9 +150,10 @@ h6{
 
 .botao{
   width: 400px;
-  height: 50px;
+  height: 60px;
 
   text-align: center;
+  align-items: center;
   font-family: 'Poppins', sans-serif;
   font-size: 15px;
   font-weight: 600;
@@ -161,7 +164,7 @@ h6{
   color: black;
 
   padding: 10px;
-  margin: 10px 0px;
+  margin: 8px 0px;
   transition: all 0.03s;
 }
 
@@ -183,13 +186,41 @@ h6{
   padding: 10px;
   margin: 20px auto 0px;
   cursor: pointer;
-  display: none;
+  display: block;
 }
 
-.btn-send{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
+
+.correct{
+  background: #23A939;
+}
+
+.incorrect{
+  background: #C21515;
+}
+
+@media (max-width: 600px)
+{
+  .facet_sidebar
+   {
+    display: none;
+   }
+}
+@media screen and (max-width: 768px) {
+  #inicio{
+    background-image: url('imagens/mariemin.jpg');
+  }
+  h4{
+    display: flex;
+    align-items: center;
+    padding: 0px 20px;
+  
+    color: #FFF;
+    text-align: justify;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 28px;
+  }
 }
 
 

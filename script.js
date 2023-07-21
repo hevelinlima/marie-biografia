@@ -18,7 +18,7 @@ const perguntas = [
     ]},
 
   {
-  pergunta: "Em que ano Marie Curie ganhou sua primeira medalha de ouro",
+  pergunta: "Em que ano Marie ganhou sua primeira medalha de ouro?",
   respostas: [
     {text: "1867 ", correct: false},
     {text: "1883 ", correct: true},
@@ -27,7 +27,7 @@ const perguntas = [
   ]},
 
 {
-pergunta: "Qual dos seguintes elementos foi descoberto por Marie Curie?",
+pergunta: "Qual desses elementos foi descoberto por Marie Curie?",
 respostas: [
   {text: "Urânio", correct: false},
   {text: "Tório ", correct: false},
@@ -57,13 +57,13 @@ respostas: [
     pergunta: "Por que Marie foi proibida de estudar em seu país natal?",
     respostas: [
       {text: "Por causa de sua nacionalidade", correct: false},
-      {text: "Porque era mulher", correct: true},
+      {text: "Por causa de seu histórico acadêmico", correct: false},
       {text: "Por falta de recursos financeiros", correct: false},
-      {text: "Por causa de seu histórico acadêmico", correct: false}
+      {text: "Porque era mulher", correct: true}
     ]},
 
     {
-      pergunta: "Em que país Marie Curie se mudou aos 24 anos para continuar suas pesquisas?",
+      pergunta: "Para qual país Marie Curie se mudou aos 24 anos para continuar suas pesquisas?",
       respostas: [
         {text: "Alemanha ", correct: false},
         {text: "Polônia ", correct: false},
@@ -72,12 +72,12 @@ respostas: [
       ]},
 
       {
-        pergunta: "Qual das seguintes afirmações é verdadeira sobre Marie Curie?",
+        pergunta: "Quem foi a atriz que interpretou Marie nos filme Radioactive?",
         respostas: [
-          {text: "Ela seguiu as expectativas rígidas impostas às mulheres de sua época.", correct: false},
-          {text: "Ela enfrentou desafios por ser polonesa vivendo na Polônia. ", correct: false},
-          {text: "Ela era casada com um cientista chamado Pierre Curie.", correct: true},
-          {text: "Ela contribuiu para a criação da bomba atômica.", correct: false}
+          {text: "Eiza González", correct: false},
+          {text: "Keira Knightley ", correct: false},
+          {text: "Rosamund Pike", correct: true},
+          {text: "Carey Mulligan", correct: false}
         ]},
     
     {
@@ -108,7 +108,7 @@ function startQuiz(){
 }
 
 function showPergunta(){
-  
+  resetState();
   let currentPergunta = perguntas[currentPerguntaIndex];
   let numeroPergunta = currentPerguntaIndex + 1;
   questions.innerHTML= numeroPergunta + "." + currentPergunta.pergunta;
@@ -118,10 +118,62 @@ function showPergunta(){
     button.innerHTML = resposta.text;
     button.classList.add("botao");
     buttonEscolha.appendChild(button);
+    if(resposta.correct){
+      button.dataset.correct = resposta.correct;
+    }
+    button.addEventListener("click", selecioneResposta);
   });
 }
 
+function resetState(){
+  buttonEnviar.style.display = "none";
+  while(buttonEscolha.firstChild){
+    buttonEscolha.removeChild(buttonEscolha.firstChild);
+  }
+}
+
+function selecioneResposta(e){
+  const selectedBotao = e.target;
+  const estaCerto = selectedBotao.dataset.correct === "true";
+  if(estaCerto){
+    selectedBotao.classList.add("correct");
+    score++}
+    else{
+      selectedBotao.classList.add("incorrect");
+    }
+    Array.from(buttonEscolha.children).forEach(botao =>{
+      if(botao.dataset.correct === "true"){
+        botao.classList.add("correct");
+      }
+      botao.disabled = true;
+    });
+    buttonEnviar.style.display = "block";
+  }
+
+  function showScore(){
+    resetState();
+    questions.innerHTML = "Você acertou " + score + " de " + perguntas.length + " !";
+    buttonEnviar.innerHTML = 'Tentar novamente.';
+    buttonEnviar.style.display = "block"; 
+  }
+
+  function handleButtonEnviar(){
+    currentPerguntaIndex++;
+    if(currentPerguntaIndex < perguntas.length){
+      showPergunta();
+    }
+    else{
+      showScore();
+    }
+  }
+
+  buttonEnviar.addEventListener("click", ()=>{
+    if(currentPerguntaIndex < perguntas.length){
+      handleButtonEnviar();
+    }
+    else{
+      startQuiz();
+    }
+  })
 
 startQuiz();
-
-
