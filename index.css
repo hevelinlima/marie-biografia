@@ -199,16 +199,11 @@ h6{
   background: #C21515;
 }
 
-@media (max-width: 600px)
-{
-  .facet_sidebar
-   {
-    display: none;
-   }
-}
 @media screen and (max-width: 768px) {
   #inicio{
     background-image: url('imagens/mariemin.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   h4{
     display: flex;
@@ -220,6 +215,9 @@ h6{
     font-size: 18px;
     font-weight: 600;
     line-height: 28px;
+  }
+  a{
+    display: none;
   }
 }
 
